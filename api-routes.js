@@ -23,8 +23,11 @@ router.get('/', function (req, res) {
 var routeController = require('./routeController');
 
 router.route('/maps/:location')
-    .get(routeController.index)
+    .get(routeController.byId)
     .put(jsonParser, routeController.new);
+
+router.route('/maps/')
+    .get(routeController.index)
 
 router.route('/maps/:location/path/:start/:end')
     .get(routeController.path);

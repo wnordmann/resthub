@@ -1,6 +1,7 @@
 // routeController.js
 // Import route model
 Route = require('./routeModel');
+Dijkstra = require('./shortestPath');
 // Handle index actions
 exports.index = function (req, res) {
     Route.get(function (err, routes) {
@@ -19,17 +20,33 @@ exports.index = function (req, res) {
 };
 exports.path = function (req, res) {
     console.log(req);
+    const seattle = {
+        a: {
+            b: 1
+        },
+        b: {
+            a: 2
+        },
+        c: {
+            d: 3
+        },
+        d: {
+            c: 4
+        }
+    }
+    const path = Dijkstra(seattle, "a", "b");
     // TODO : Handle error
     res.json({
         status: "success",
         message: "Route retrieved successfully",
+        path: path
     });
 };
 // Handle create route actions
 exports.new = function (req, res) {
     var route = new Route();
     route.nodes = req.body.nodes; //TODO: Data integrity
-    route.location = req.params[0]; //TODO: Verify params[0]
+    route.location = req.params.location;
     // save the route and check for errors
     route.save(function (err) {
         // if (err)
@@ -47,6 +64,20 @@ exports.view = function (req, res) {
             res.send(err);
         res.json({
             message: 'route details loading..',
+            data: route
+        });
+    });
+};
+
+// Handle view contact info
+exports.byId = function (req, res) {
+    Route.find({
+        location: req.params.location
+    }, function (err, route) {
+        if (err)
+            res.send(err);
+        res.json({
+            message: 'Contact details loading...',
             data: route
         });
     });

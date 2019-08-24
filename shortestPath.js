@@ -41,7 +41,7 @@ const lowestCostNode = (costs, processed) => {
 
 const INFINITY = "Infinity";
 // function that returns the minimum cost and path to reach Finish
-exports.dijkstra = function (graph, startNodeName, endNodeName) {
+module.exports = function (graph, startNodeName, endNodeName) {
     // default matching start and end fall out function
     if (startNodeName === endNodeName) {
         return {
@@ -104,9 +104,3 @@ exports.dijkstra = function (graph, startNodeName, endNodeName) {
     };
 
 };
-
-console.log(this.dijkstra(redmond, "a", "c"));
-// console.log(this.dijkstra(redmond, "b", "a"));
-// console.log(this.dijkstra(redmond, "a", "a"));
-// console.log(this.dijkstra(seattle, "a", "b"));
-// console.log(this.dijkstra(seattle, "a", "c"));
