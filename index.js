@@ -16,13 +16,7 @@ app.listen(port, function () {
     console.log("Running RestHub on port " + port);
 });
 
-app.use('/api', apiRoutes) // Use Api routes in the App
-
-// // Configure bodyparser to handle post requests
-// app.use(bodyParser.urlencoded({
-//     extended: true
-// }));
-// app.use(bodyParser.json());
+app.use('/', apiRoutes) // Use Api routes in the App
 
 // Connect to Mongoose and set connection variable
 mongoose.connect('mongodb://localhost/resthub', {

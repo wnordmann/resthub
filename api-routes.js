@@ -19,17 +19,15 @@ router.get('/', function (req, res) {
     });
 });
 
-// Import contact controller
-var contactController = require('./contactController');
-// Contact routes
-router.route('/contacts')
-    .get(contactController.index)
-    .post(jsonParser, contactController.new);
-router.route('/contacts/:contact_id')
-    .get(contactController.view)
-    .patch(jsonParser, contactController.update)
-    .put(contactController.update)
-    .delete(contactController.delete);
+// Import route controller
+var routeController = require('./routeController');
+
+router.route('/maps/:location')
+    .get(routeController.index)
+    .put(jsonParser, routeController.new);
+
+router.route('/maps/:location/path/:start/:end')
+    .get(routeController.path);
 
 // Export API routes
 module.exports = router;
